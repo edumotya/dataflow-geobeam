@@ -32,12 +32,19 @@ steps:
       - --dockerfile=Dockerfile
       - --destination=gcr.io/dataflow-geobeam/base:$_VERSION
       - --cache=true
-
+  # build base image for python 3.9
+  - name: gcr.io/kaniko-project/executor
+    id: base-py39
+    args:
+      - --dockerfile=Dockerfile.py39
+      - --destination=gcr.io/dataflow-geobeam/base-py39:$_VERSION
+      - --cache=true
+   
   # build examples image for Python 3.7
   #- name: gcr.io/kaniko-project/executor
   #  id: example-py37
   #  args:
-  #    - --dockerfile=geobeam/examples/Dockerfile.py37
+  #    - --dockerfile=ge obeam/examples/Dockerfile.py37
   #    - --destination=gcr.io/dataflow-geobeam/example-py37:$_VERSION
   #    - --cache=true
   #  waitFor: ['base']
